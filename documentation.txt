@@ -1,0 +1,106 @@
+==HOW TO USE JVN/DP:
+
+--Creating and running a VN
+Create a file in the same directory as 'MasterHandler.class' and add your instructions (as detailed in the VN INSTRUCTIONS section of this document) to this file. Each instruction must be on its own line, and can have leading whitespace. Next, run MasterHandler.class with your script file name as a program argument (if you're running from command line, use "java MasterHandler <your_script_filename>") and a DrawingPanel window should run and operate according to your script file. If you require any additional resources for your VN (e.g. image files), put those in the same directory as well. DO NOT name any of your files "null".
+
+--User control
+When the DrawingPanel appears, the user can use any mouse button or keyboard key to advance the VN, unless a menu was specified in the script in which case the user must press a number key on the keyboard corresponding to the desired option on the menu.
+
+==VN INSTRUCTIONS:
+Each VN script is comprised of a series of instructions which JVN/DP will interpret and use to provide the user with a VN experience. Each instruction must appear on its own line, and is allowed to have leading whitespace (such as the TAB or SPACE characters) that do not affect how the program is run. Empty lines are also allowed.
+
+All of these INSTRUCTIONS can be written in lowercase, but uppercase is the recommended style in order to distinguish instructions from player-viewable content.
+
+BACKGROUND <background_filename>
+(Alias: BG)
+Sets the background.
+    <background_filename>: The name of the image file to be used as a background. If this is set to, "null", the background will be erased.
+
+FOREGROUNDLEFT <foreground_filename> <margin_left> <margin_top>
+(Alias: FGLEFT)
+Puts a foreground sprite on the window with a margin originating from the top left. FGLEFT can be used concurrently with FGRIGHT to have two sprites on the screen at a time.
+    <foreground_filename>: The name of the image file to be used as a foreground sprite. If this is set to, "null", any FGLEFT sprites will be erased instead.
+    <margin_left>: Distance from the left side of the window the left edge of the sprite will be placed.
+    <margin_top>: Distance from the top of the window the top edge of the sprite will be placed.
+
+FOREGROUNDRIGHT <foreground_filename> <margin_right> <margin_top>
+(Alias: FGRIGHT)
+Puts a foreground sprite on the window with a margin originating from the top right. FGRIGHT can be used concurrently with FGLEFT to have two sprites on the screen at a time.
+    <foreground_filename>: The name of the image file to be used as a foreground sprite. If this is set to, "null", any FGRIGHT sprites will be erased instead.
+    <margin_left>: Distance from the right side of the window the left edge of the sprite will be placed.
+    <margin_top>: Distance from the top of the window the top edge of the sprite will be placed.
+
+TEXT <text>
+(Alias: TXT)
+Puts text in a textbox without a nametag on top and waits for user input to proceed to the next instruction. Text does not wrap, so lines of text that are too large will not fit on the window.
+    <text>: Text to put in the textbox.
+
+DIALOG <name>: <text>
+(Alias: DLG)
+This instruction has a colon between the name of the speaker and the text they speak. Puts text in a textbox with a nametag on top and waits for user input to proceed to the next instruction. Text does not wrap, so lines of text that are too large will not fit on the window.
+    <name>: Name to put in the nametag.
+    <text>: Text to put in the textbox.
+
+TXTC <line_number> <text>
+Puts additional continuing text underneath the first line of a textbox and waits for user input to proceed to the next instruction. TXTC cannot be chained, because any more than two TXTC instructions at a time will draw text over the previously drawn text and create a rather disgusting word salad.
+    <line_number>: The line to draw more text under on in the textbox. 1 will put text under the 1st line, 2 will put text under the 2nd line, etc.
+    <text>: The text to put on the textbox.
+
+LABEL <label_name>
+(Alias: LBL)
+Sets a location for a label. When jumped to, JVN/DP will ignore all instructions between the jump and the label so that only the instructions after the label will be run.
+    <label_name>: The name of the label to be made.
+
+JUMPTO <label_name>
+(Aliases: JMP, JUMP)
+Jumps to a label specified after the JMP.
+    <label_name>: The name of the label to jump to.
+
+MENU
+Tells JVN/DP that the next instructions are for specifying menu options until it finds an ENDMENU.
+
+OPTION <label> <text>
+Adds an option to the MENU. Each option, when selected, will cause JVN/DP to jump to the specified label. Text does not wrap, so lines of text that are too large will not fit on the option box. Realistically, only 9 MENU options can be meaningfully interacted with at a time (most keyboards have number keys 0-9, where 0 is ignored by JVN/DP), and JVN/DP will only display up to 20 options at a time owing to the static 600px window height.
+    <label>: The label to jump when selected.
+    <text>: The text the option should show in the menu.
+
+ENDMENU
+Tells JVN/DP that MENU OPTIONS have been specified and that it should display a menu. It will then wait for the user to select a valid menu option.
+
+FLAG <flag_name>
+Sets a VN flag, which can be used with IF to run certain instructions only if the flag is set.
+    <flag_name>: The name of the flag to set.
+
+UNFLAG <flag_name>
+Unsets a VN flag.
+    <flag_name>: The name of the flag to remove.
+
+IF <flag_name> <INSTRUCTION>
+Checks if a FLAG is set, and if it is, runs the INSTRUCTION.
+    <flag_name>: The name of the flag to check for.
+    <INSTRUCTION>: A JVN/DP VN INSTRUCTION. This INSTRUCTION can be anything, even another IF. This will allow you to chain IF statements so the program will check for multiple flags at the same time.
+
+PLAY <music_filename>
+Plays music in the background. This has been tested successfully using MP3 files.
+    <music_filename>: The filename of the music to play in the background
+
+STOPPLAYBACK <music_filename>
+(Alias: STOPPLAY)
+Stops the music currently playing in the background.
+
+CLEAR
+(Alias: CLR)
+Resets the screen so only the background and foreground objects are present.
+
+IMPORT <file_name>
+Appends the content of another VN script to the current one. Can be JMPed to with the label imported_<file_name>
+    <file_name>: The name of the file to import content from
+
+STOP
+Causes the VN window to close.
+
+==LIMITATIONS:
+-JVN/DP will only draw a VN window with a size of 800x600 pixels.
+-Animated GIF files that are displayed will not be animated.
+    -So-called "JIF" files are not supported.
+-JVN/DP is not able to detect how large individual characters in text are because text is not displayed with a monospaced font. As such, JVN/DP cannot wrap text, nor will dynamically-sized boxes be able to size according to the text it contains with accuracy.

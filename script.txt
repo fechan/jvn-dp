@@ -1,0 +1,79 @@
+IMPORT importedScript.txt
+PLAY Sleep Away.mp3
+BG grove.jpg
+
+MENU
+    OPTION imported_importedScript.txt Import a script from a different file
+    OPTION noImport Don't import
+ENDMENU
+
+LABEL noImport
+TEXT You are standing in the middle of a grove. You see a clearing up ahead where there is a small shack lit by a beam of light from the canopy.
+MENU
+    OPTION invshack Investigate the shack
+    OPTION gogrove Retreat into the grove
+    OPTION donothing Stay where you are
+ENDMENU
+
+LABEL donothing
+    FLAG didnothing
+
+    TEXT You successfully accomplish nothing by staying where you are.
+    TXTC 1 Suddenly, you are overwhelmed with a desire to accomplish something.
+    MENU
+        OPTION invshack Investigate the shack
+        OPTION gogrove Retreat into the grove
+    ENDMENU
+
+LABEL gogrove
+    TEXT Leaves above you are thick, and the ground barely sees the light of day save for a few rays of light that manage to beat the odds.
+    TEXT As you walk further into the grove, you begin to wonder what you are doing there.
+    TEXT You don't even know how you got here.
+    TEXT As you venture even further, you begin to think everything is starting to look a little familiar.
+        TXTC 1 You're sure you've seen this place before.
+    MENU
+        OPTION inspect Investigate your surroundings for answers
+        OPTION continue Ignore the feeling and keep going
+    ENDMENU
+
+LABEL inspect
+    TEXT As you take a look around at your surroundings, you see that only a little bit away is a beam of light hitting a small shack.
+        TXTC 1 You have been going in circles.
+    TEXT Since there is nowhere else to go, you head over to the shack.
+    JUMPTO invshack
+
+LABEL continue
+    TEXT You continue to wander through the grove.
+    BG thick_forest.jpg
+    TEXT You have managed to get very lost.
+    STOPPLAY
+    TEXT The more you become lost, the more you feel that you are being watched.
+    MENU
+        OPTION lost Try to find your way back.
+        OPTION lost Try to find your way back.
+        OPTION lost Try to find your way back.
+        OPTION lost Try to find your way back.
+        OPTION lost Try to find your way back.
+        OPTION lost Try to find your way back.
+    ENDMENU
+
+LABEL lost
+    TEXT You try to find your way back, but you're so lost that you couldn't.
+    FGLEFT trollface.jpg 100 100
+    TEXT A troll has sensed your lack of direction and has decided that you would make for a good snack.
+    TEXT You have died.
+    STOP
+
+LABEL invshack
+    FGLEFT shack.jpg 50 15
+    TEXT You investigate the shack.
+        IF didnothing TXTC 1 There was no harm in doing so. You wonder why you wasted time just standing around earlier.
+    TEXT It's a rather decrepit shack. Water damaged, paint disintegrated, rickety roof...
+        TXTC 1 Needless to say, it doesn't look so good.
+    TEXT Suddenly, you are approached by a troll.
+
+    FGRIGHT trollface.jpg 300 100
+    DIALOG troll: Hello there.
+    DIALOG troll: You appear to be lost.
+    TXTC 1 Please allow me to guide you away from my lawn.
+    STOP

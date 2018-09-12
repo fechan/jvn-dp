@@ -1,0 +1,92 @@
+txt Imported some kind of magical fantasy thing!
+txt You've just disembarked a ship and are at the Port of Arrienera.
+    txtc 1 Taking a look around, the scenery is quite nice. A boardwalk running to parallel is host to a modicum of shops and coffeehouses.
+txt You check your bags to see if anything has been stolen. You have:
+    txtc 1 90 Arrien coins, some wizard's robes, your travel documents, and some jerky for the road.
+txt You were told to find the Jellen Company by nightfall when you arrived, but you're not entirely certain where it is.
+    txtc 1 You try looking around for signs, but nothing is particularly helpful.
+menu
+    option signs Continue to look for signs
+    option passerby Ask a passing local NOT IMPLEMENTED
+endmenu
+
+lbl signs
+txt You look around for signs, more intently this time.
+txt By the cargo inspection booth is a map mounted on a large board.
+    txtc 1 Someone else is standing in front of the board.
+menu
+    option mapTalk Talk with the person in front of the map PARTIALLY IMPLEMENTED
+    option mapLook Ignore them and look at the map
+endmenu
+
+lbl mapLook
+flag lookedMap
+txt You look at the map.
+    txtc 1 You see a logo you recognize, but aren't sure if this is the place.
+    txtc 2 Looking at the rest of the map, there's nothing of much interest.
+menu
+    option goLogo Go to the place marked by the logo
+    option mapTalk Ask the person next to you if they know PARTIALLY IMPLEMENTED
+endmenu
+
+lbl mapTalk
+txt You ask if they know where you might find the Jellen Co. offices.
+    if lookedMap txtc 1 They're a bit taken by surprise after you suddenly spoke.
+dlg ???: Their offices? I've just come here, so I don't know.
+    txtc 1 They give a nervous chuckle.
+dlg ???: For what it's worth, I'm getting a job interview with them today at the coffeehouse over there where I was told to meet.
+dlg ???: If you want to tag along, I guess I can't exactly stop you.
+txt You decide that this will lead you in the right direction more than the indeterminate logo on the map.
+txt The inside of the coffeehouse are a few people, but it's not great in number. Oil lamps on each table light the room.
+    txtc 1 A barista behind the counter is stacking cups idly. The coffeehouse must not be getting too many customers.
+menu
+    option getCoffee Get some coffee
+    option followCoffee Continue following
+endmenu
+
+lbl getCoffee
+txt You get
+
+txt THIS TREE NOT IMPLEMENTED FURTHER
+stop
+
+lbl goLogo
+txt You try to go to find Jellen Co. by following the marked location on the map and get through the streets without much trouble.
+    txtc 1 Street merchants sometimes try and sell you things you don't want to buy, but they weren't too much of a hinderance.
+    txtc 2 Finally, you arrive at a building with nothing but the logo you saw on it.
+txt You try and head into the building, but a guard stops you.
+dlg Guard: Hey now stranger, you can't just be bargin' in here like that! Where's your ID?
+txt You ruffle around your bag for your travel documents and take out your ID for the guard.
+    txtc 1 He looks at your ID card and frowns.
+dlg Guard: Look sonny, I'm afraid I don't recognize your ID. You a new hire or somethin'?
+txt You're not entirely certain if you are a new hire. You were just told to find Jellen Co.
+menu
+    option lieHire Yeah, I'm a new hire
+    option notHire Sorry, I must have the wrong place
+endmenu
+
+lbl lieHire
+txt You claim that you are a new hire, and the guard furrows his brow.
+dlg Guard: Alright sonny, I'm gonna have to go check that with the higher-ups. You just sit tight, I'm calling the office.
+txt He gives you back your ID card and disappears into the building.
+    txtc 1 He takes a while, but finally returns with another guard who has a large book in his hand.
+dlg Other Guard: Sorry for the wait, let's get this over with. You ID, if you please?
+txt You show him your ID, and he ruffles through the worn pages of the big book while mumbling to himself.
+dlg Ohter Guard: I'm afraid you're not in the records. I can't let you in.
+txt He holds out your ID card for you to take.
+    txtc 1 After you take your card back, he says a few words to the first guard and disappears into the building.
+txt You're not sure what to do, so you return to the docks as nightfall approaches.
+    txtc 1 You didn't meet your objective in time.
+    txtc 2 - BAD END
+stop
+
+lbl notHire
+txt You decide that this must be the wrong place and head back to the docks disappointed.
+    txtc 1 It is late in the evening, but there is still time until nightfall.
+txt Many shops are closing for the day, but there are still a few places with their lights on.
+    txtc 1 Some late-night dock workers are filing into a tavern by the boardwalk.
+    txtc 2 In the corner of your eye, the person looking at the map from earlier is walking into a coffeehouse.
+menu
+    option goTavern Go into the tavern NOT IMPLEMENTED
+    option follow Follow the stranger from before NOT IMPLEMENTED
+endmenu
