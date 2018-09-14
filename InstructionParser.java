@@ -117,7 +117,7 @@ public class InstructionParser{
                 case "IMPORT":
                     return true;
                 case "PLAY":
-                    playMusic(String.join(" ", Arrays.copyOfRange(arguments, 1, arguments.length)));
+                    playMusic(Double.parseDouble(arguments[1])/100, String.join(" ", Arrays.copyOfRange(arguments, 2, arguments.length)));
                     return true;
                 case "STOPPLAY":
                 case "STOPPLAYBACK":
@@ -234,9 +234,10 @@ public class InstructionParser{
     }
 
     //causes music to play
-    private void playMusic(String fileName){
+    private void playMusic(double volume ,String fileName){
         this.audio = new AudioHandler(fileName);
         this.audio.startMusic();
+        this.audio.setVolume(volume);
     }
 
     //causes music to stop

@@ -1,5 +1,5 @@
 IMPORT importedScript.txt
-PLAY Sleep Away.mp3
+PLAY 100 Sleep Away.mp3
 BG grove.jpg
 
 MENU

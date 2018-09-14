@@ -6,7 +6,8 @@ import javafx.scene.media.MediaPlayer;
 import java.io.File;
 import com.sun.javafx.application.PlatformImpl;
 
-/*This class allows the program to play music in a background thread*/
+/*This class allows the program to play music in a ba
+ckground thread*/
 public class AudioHandler implements Runnable{
     private MediaPlayer songPlayer;
 
@@ -24,6 +25,10 @@ public class AudioHandler implements Runnable{
 
     public void stopMusic(){
         this.songPlayer.stop();
+    }
+
+    public void setVolume(double volume){
+        this.songPlayer.setVolume(volume);
     }
 
     //This part actually plays the music by using MediaPlayer.play()

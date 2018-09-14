@@ -80,8 +80,9 @@ Checks if a FLAG is set, and if it is, runs the INSTRUCTION.
     <flag_name>: The name of the flag to check for.
     <INSTRUCTION>: A JVN/DP VN INSTRUCTION. This INSTRUCTION can be anything, even another IF. This will allow you to chain IF statements so the program will check for multiple flags at the same time.
 
-PLAY <music_filename>
+PLAY <volume> <music_filename>
 Plays music in the background. This has been tested successfully using MP3 files.
+    <volume>: The volume to play the music at, from 0-100
     <music_filename>: The filename of the music to play in the background
 
 STOPPLAYBACK <music_filename>
