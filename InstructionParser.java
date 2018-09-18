@@ -13,6 +13,8 @@ public class InstructionParser{
 
     private Map<String, Boolean> flags = new HashMap<>();
 
+    private Color themeBackgroundColor = Color.CYAN;
+    private Color themeTextColor = Color.BLACK;
     private String currentBGFile;
     private String currentFGLeftFile;
     private int[] marginsLeft = {0,0};
@@ -60,6 +62,10 @@ public class InstructionParser{
                 case "CLR":
                 case "CLEAR":
                     resetScreen();
+                    return true;
+                case "COLOR":
+                    setThemeColor(Integer.parseInt(arguments[1]), Integer.parseInt(arguments[2]), Integer.parseInt(arguments[3]),
+                            Integer.parseInt(arguments[4]), Integer.parseInt(arguments[5]), Integer.parseInt(arguments[6]));
                     return true;
                 case "TXT":
                 case "TEXT":
@@ -149,15 +155,15 @@ public class InstructionParser{
 
     //Draws a generic textbox with text
     private void drawTextboxRegular(String text){
-        mainGraphics.setColor(Color.cyan);
+        mainGraphics.setColor(themeBackgroundColor);
         mainGraphics.fillRect(10, 430, 780, 160);
-        mainGraphics.setColor(Color.black);
+        mainGraphics.setColor(this.themeTextColor);
         mainGraphics.drawString(text, 20, 450);
     }
 
     //Draws additional continuing text under a previous TXT
     private void drawTextContinuing(int line, String text){
-        mainGraphics.setColor(Color.black);
+        mainGraphics.setColor(this.themeTextColor);
         mainGraphics.translate(0, 20*line);
         mainGraphics.drawString(text, 20, 450);
         mainGraphics.translate(0, -20*line);
@@ -171,10 +177,10 @@ public class InstructionParser{
 
     //Draws a nametag
     private void drawNametag(String name){
-        mainGraphics.setColor(Color.cyan);
+        mainGraphics.setColor(themeBackgroundColor);
         int nametagSize = 20 + name.length()*6;
         mainGraphics.fillRect(10, 405, nametagSize, 20);
-        mainGraphics.setColor(Color.black);
+        mainGraphics.setColor(this.themeTextColor);
         mainGraphics.drawString(name, 20, 420);
     }
 
@@ -224,10 +230,10 @@ public class InstructionParser{
         int marginTop = 10;
 
         for (int opt = 0; opt < menuItems.size(); opt++){
-            mainGraphics.setColor(Color.cyan);
+            mainGraphics.setColor(themeBackgroundColor);
             mainGraphics.fillRect(marginLeft, opt*30+marginTop, 400, 20);
 
-            mainGraphics.setColor(Color.black);
+            mainGraphics.setColor(this.themeTextColor);
             mainGraphics.drawString(opt+1 + ": " + String.join(" ", Arrays.copyOfRange(menuItems.get(opt), 1, menuItems.get(opt).length
                 )), marginLeft+10, opt*30+15+marginTop);
         }
@@ -247,6 +253,12 @@ public class InstructionParser{
         } catch (NullPointerException e){
             System.out.println("Unable to stop the music! Is a sick jam not currently playing?");
         }
+    }
+
+    //sets the color of all the UI elements to the desired RGB value
+    private void setThemeColor(int backgroundR, int backgroundG, int backgroundB, int textR, int textG, int textB){
+        this.themeBackgroundColor = new Color(backgroundR, backgroundG, backgroundB);
+        this.themeTextColor = new Color(textR, textG, textB);
     }
 
     //gets whether or not InstructionParser is in a menu state and expects an integer key input

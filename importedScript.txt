@@ -1,3 +1,4 @@
+color 255 255 120 0 0 0
 txt Imported some kind of magical fantasy thing!
 txt You've just disembarked a ship and are at the Port of Arrienera.
     txtc 1 Taking a look around, the scenery is quite nice. A boardwalk running to parallel is host to a modicum of shops and coffeehouses.

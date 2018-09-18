@@ -16,6 +16,15 @@ BACKGROUND <background_filename>
 Sets the background.
     <background_filename>: The name of the image file to be used as a background. If this is set to, "null", the background will be erased.
 
+COLOR <bg_red> <bg_green> <bg_blue> <txt_red> <txt_green> <txt_blue>
+Sets the theme, the color of all the UI elements. Conforms to RGB scale. By default the theme background color is cyan, and the theme text color is black.
+    <bg_red>: The amount of red in the theme background color on a scale from 0-255
+    <bg_green>: The amount of green in the theme background color on a scale from 0-255
+    <bg_blue>: The amount of blue in the theme background color on a scale from 0-255
+    <txt_red>: The amount of red in the theme text color on a scale from 0-255
+    <txt_green>: The amount of green in the theme text color on a scale from 0-255
+    <txt_blue>: The amount of blue in the theme text color on a scale from 0-255
+
 FOREGROUNDLEFT <foreground_filename> <margin_left> <margin_top>
 (Alias: FGLEFT)
 Puts a foreground sprite on the window with a margin originating from the top left. FGLEFT can be used concurrently with FGRIGHT to have two sprites on the screen at a time.
