@@ -239,14 +239,14 @@ public class InstructionParser{
         }
     }
 
-    //causes music to play
+    //Causes music to play
     private void playMusic(double volume ,String fileName){
         this.audio = new AudioHandler(fileName);
         this.audio.startMusic();
         this.audio.setVolume(volume);
     }
 
-    //causes music to stop
+    //Causes music to stop
     private void stopPlayback(){
         try {
             this.audio.stopMusic();
@@ -255,17 +255,17 @@ public class InstructionParser{
         }
     }
 
-    //sets the color of all the UI elements to the desired RGB value
+    //Sets the color of all the UI elements to the desired RGB value
     private void setThemeColor(int backgroundR, int backgroundG, int backgroundB, int textR, int textG, int textB){
         this.themeBackgroundColor = new Color(backgroundR, backgroundG, backgroundB);
         this.themeTextColor = new Color(textR, textG, textB);
     }
 
-    //gets whether or not InstructionParser is in a menu state and expects an integer key input
+    //Gets whether or not InstructionParser is in a menu state and expects an integer key input
     public boolean getMenuState(){
         return inMenuState;
     }
 
-    //gets how many items are in the current menu
+    //Gets how many items are in the current menu
     public int getMenuItemsSize(){ return this.menuItems.size(); }
 }
