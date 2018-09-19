@@ -27,14 +27,14 @@ public class MasterHandler implements KeyListener, MouseListener{
         }
 
         while (instructions.hasNextLine()) {
-            instructionList.add(instructions.nextLine()); //load instructions onto ArrayList instructions
+            instructionList.add(instructions.nextLine()); //load instructions from the script into ArrayList instructions
         }
 
         doNextInstruction('a'); //Start the program
     }
 
     //Has the parser do the next instruction, and if it should auto advance, do the next next one as well
-    public static void doNextInstruction(char keyChar){
+    private static void doNextInstruction(char keyChar){ //keyChar is the key that the user pressed to call this method
         while (nextIsImport(instructionList.get(0))) {}
 
         if (parser.getMenuState()) {  //if and only if the parser expects an integer...
@@ -51,7 +51,7 @@ public class MasterHandler implements KeyListener, MouseListener{
     }
 
     //Checks if the instruction is an IMPORT, which cannot be handled by InstructionParser
-    public static Boolean nextIsImport(String instruction){
+    private static Boolean nextIsImport(String instruction){
         if (instruction.split(" ")[0].equals("IMPORT")){
             importScript(instruction.split(" ")[1]);
             instructionList.remove(0);
@@ -61,7 +61,7 @@ public class MasterHandler implements KeyListener, MouseListener{
     }
 
     //Appends an imported script to the current ArrayList of instructions
-    public static void importScript(String filename){
+    private static void importScript(String filename){
         try {
             Scanner foreignScript = new Scanner(new File(filename));
 
@@ -86,7 +86,7 @@ public class MasterHandler implements KeyListener, MouseListener{
     @Override
     public void mouseReleased(MouseEvent e){
         doNextInstruction('m');
-    }
+    } //clicking with the mouse presses 'm'
 
     @Override
     public void keyPressed(KeyEvent e) {}
